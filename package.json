@@ -1,6 +1,6 @@
 {
   "name": "@cantoo/jszip",
-  "version": "3.10.2",
+  "version": "3.10.3",
   "author": "Stuart Knightley <stuart@stuartk.com>",
   "description": "Create, read and edit .zip files with JavaScript http://stuartk.com/jszip",
   "scripts": {
