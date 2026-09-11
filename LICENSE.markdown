@@ -4,7 +4,8 @@ license.
 The MIT License
 ===============
 
-Copyright (c) 2009-2016 Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso
+Copyright (c) 2009-2016 Stuart Knightley, David Duponchel, Franz Buchinger, António Afonso (original JSZip)
+Copyright (c) 2026 bybrave (jszip2 fork)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

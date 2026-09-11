@@ -22,7 +22,7 @@ __Since__: v3.0.0
 
 name               | type   | description
 -------------------|--------|------------
-data               | String/Array of bytes/ArrayBuffer/Uint8Array/Buffer/Blob/Promise | the zip file
+data               | String/Array of bytes/ArrayBuffer/Uint8Array/Buffer/Blob/Promise/Web ReadableStream | the zip file
 options            | object | the options to load the zip file
 
 Content of `options` :

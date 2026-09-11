@@ -17,7 +17,7 @@ __Since__: v1.0.0
 name                | type    | description
 --------------------|---------|------------
 name                | string  | the name of the file. You can specify folders in the name : the folder separator is a forward slash ("/").
-data                | String/ArrayBuffer/Uint8Array/Buffer/Blob/Promise/Nodejs stream | the content of the file.
+data                | String/ArrayBuffer/Uint8Array/Buffer/Blob/Promise/Nodejs stream/Web ReadableStream | the content of the file.
 options             | object  | the options.
 
 Content of `options` :
@@ -104,6 +104,20 @@ by [generateAsync()]({{site.baseurl}}/documentation/api_jszip/generate_async.htm
 or by [ZipObject methods]({{site.baseurl}}/documentation/api_zipobject.html)).
 In that case, the promise/stream (depending on the method called) will get
 an error.
+
+#### About web streams <small>since @bybrave/jszip2 v4.2.0</small>
+
+A web `ReadableStream` (WHATWG Streams) is accepted too, in every
+environment where it exists (browsers, Web Workers, nodejs >= 18). The
+chunks can be `Uint8Array`s (the usual case), `ArrayBuffer`s or strings.
+Like nodejs streams, a web stream can only be used once, and files added
+from a stream can't be read with the sync API.
+
+```js
+// zip a fetch response without buffering it first
+const response = await fetch(url);
+zip.file("data.json", response.body);
+```
 
 
 ### `base64` option

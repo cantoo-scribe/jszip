@@ -27,6 +27,7 @@ options.mimeType    | string   | `application/zip` | mime-type for the generated
 options.platform    | string   | `DOS`    | The platform to use when generating the zip file. [More](#platform-option).
 options.encodeFileName | function | encode with UTF-8 | the function to encode the file name / comment. [More](#encodefilename-option).
 options.streamFiles | boolean  | false    | Stream the files and create file descriptors, see below. [More](#streamfiles-option).
+options.zip64       | boolean  | false    | Force the ZIP64 format for every entry. [More](#zip64-option).
 onUpdate            | function |          | The optional function called on each internal update with the metadata. [More](#onupdate-callback).
 
 ### `type` option
@@ -204,6 +205,30 @@ zip.generateAsync({type:"blob"}, function updateCallback(metadata) {
     }
 })
 ```
+
+### `zip64` option <small>since @bybrave/jszip2 v4.3.0</small>
+
+The classic zip format stores sizes and offsets on 4 bytes and the entries
+count on 2: bigger values need the ZIP64 format. JSZip switches to ZIP64
+**automatically** when a known size, an offset or the entries count
+overflows — you normally don't need this option.
+
+The exception is `streamFiles: true` with a file over 4 GiB: the sizes are
+unknown when the entry starts, so the ZIP64 decision can't be made
+automatically. Set `zip64: true` in that case (an explicit error will remind
+you otherwise).
+
+```js
+zip.file("huge.bin", hugeContentStream);
+zip.generateNodeStream({
+    streamFiles: true,
+    zip64: true
+});
+```
+
+Note: `zip64: true` forces the ZIP64 structures on every entry. The
+resulting file needs a ZIP64-aware reader — that's virtually everything
+released after ~2010, but not some legacy tools.
 
 ## Other examples
 
